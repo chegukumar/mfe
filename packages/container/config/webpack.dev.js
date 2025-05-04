@@ -5,6 +5,9 @@ const commonConfig = require('./webpack.common');
 
 const devConfig = {
   mode: 'development',
+  output: {
+    publicPath: "http://localhost:8080/"
+  },
   devServer: {
     port: 8080,
     historyApiFallback: {
@@ -14,7 +17,8 @@ const devConfig = {
   plugins: [
     new ModuleFederationPlugin({
       remotes: {
-        Marketing: 'marketing@http://localhost:8081/remoteEntry.js'
+        Marketing: 'marketing@http://localhost:8081/remoteEntry.js',
+        Auth: 'auth@http://localhost:8082/remoteEntry.js'
       },
       shared: paclageJson.dependencies
     }),
